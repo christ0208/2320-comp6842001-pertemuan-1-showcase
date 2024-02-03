@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: dev_showcase-app
+    build:
+      dockerfile: Dockerfile.development
+      context: .
+    restart: always
+    environment:
+      - .env.development
+    ports:
+      - 80:80
+    networks:
+      - default
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    container_name: dev_showcase-db
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dev_showcase
+      MYSQL_USER: dev_showcase
+      MYSQL_PASSWORD: dev_showcase
+      MYSQL_DATABASE: dev_showcase
+    networks:
+      - default
+    ports:
+      - 3306:3306
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    networks:
+      - default
+    restart: always
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+
+networks:
+  default:
+    name: dev_showcase-network_default
+    driver: bridge

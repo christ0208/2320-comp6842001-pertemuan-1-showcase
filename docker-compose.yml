@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: showcase-app
+    build:
+      dockerfile: Dockerfile.production
+      context: .
+    restart: unless-stopped
+    ports:
+      - 80:80
+    networks:
+      - default
+    depends_on:
+      - db
+
+  db:
+    container_name: showcase-db
+    image: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: showcase
+      MYSQL_USER: showcase
+      MYSQL_PASSWORD: showcase
+      MYSQL_DATABASE: showcase
+    networks:
+      - default
+    ports:
+      - 3306:3306
+
+networks:
+  default:
+    name: showcase-network_default
+    driver: bridge
