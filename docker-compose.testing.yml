@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: test_showcase-db
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: test_showcase
+      MYSQL_USER: test_showcase
+      MYSQL_PASSWORD: test_showcase
+      MYSQL_DATABASE: test_showcase
+    ports:
+      - 3306:3306

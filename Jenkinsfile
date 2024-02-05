@@ -7,6 +7,14 @@ pipeline {
             }
         }
 
+        stage('test') {
+            steps {
+                sh 'docker compose -f docker-compose.testing.yml up -d'
+                sh 'php artisan test'
+                sh 'docker compose -f docker-compose.testing.yml down'
+            }
+        }
+
         stage ('publish') {
             steps {
                 sh 'docker compose -f docker-compose.yml up -d'
