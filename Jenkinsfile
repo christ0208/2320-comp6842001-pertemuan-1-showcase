@@ -18,7 +18,7 @@ pipeline {
                 sh 'echo DB_DATABASE=${DB_DATABASE} >> .env'
                 sh 'echo DB_PASSWORD=${DB_PASSWORD} >> .env'
                 sh 'php artisan key:generate'
-                sh 'php artisan migrate'
+                sh 'php artisan migrate:refresh --force'
                 sh 'php artisan test'
             }
         }
