@@ -9,9 +9,8 @@ pipeline {
 
         stage('test') {
             steps {
-                sh 'composer install'
-                sh 'php artisan test'
                 sh 'docker compose -f docker-compose.testing.yml up -d'
+                sh 'docker exec -it showcase_app php artisan test'
                 sh 'docker compose -f docker-compose.testing.yml down'
             }
         }
