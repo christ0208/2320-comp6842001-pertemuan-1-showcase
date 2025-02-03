@@ -13,6 +13,7 @@ pipeline {
                 sh 'php --version'
                 sh 'composer --version'
                 sh 'composer install'
+                sh 'echo APP_KEY= >> .env'
                 sh 'echo DB_HOST=${DB_HOST} >> .env'
                 sh 'echo DB_USERNAME=${DB_USERNAME} >> .env'
                 sh 'echo DB_DATABASE=${DB_DATABASE} >> .env'
