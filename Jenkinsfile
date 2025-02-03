@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('test') {
             steps {
+                sh 'docker compose start db'
                 sh 'php --version'
                 sh 'composer --version'
                 sh 'composer install'
