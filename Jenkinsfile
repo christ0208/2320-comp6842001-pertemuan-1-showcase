@@ -2,11 +2,14 @@ pipeline {
     agent any 
     stages {
         stage('test') {
-            sh 'php --version'
-            sh 'composer version'
-            sh 'composer install'
-            sh 'php artisan test'
+            steps {
+                sh 'php --version'
+                sh 'composer version'
+                sh 'composer install'
+                sh 'php artisan test'
+            }
         }
+        
         stage('Docker build') {
             steps {
                 sh 'docker compose -f docker-compose.yml build'
