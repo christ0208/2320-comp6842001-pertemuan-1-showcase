@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('test') {
             environment {
-                DB_HOST = "showcase"
+                DB_HOST = "127.0.0.1"
                 DB_DATABASE = "showcase"
                 DB_USERNAME = "showcase"
                 DB_PASSWORD = "showcase"
@@ -24,7 +24,14 @@ pipeline {
         }
         
         stage('Docker build') {
+            environment {
+                DB_HOST = "db"
+                DB_DATABASE = "showcase"
+                DB_USERNAME = "showcase"
+                DB_PASSWORD = "showcase"
+            }
             steps {
+                sh 'echo DB_HOST=${DB_HOST} >> .env'
                 sh 'docker compose -f docker-compose.yml build'
             }
         }
