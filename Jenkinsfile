@@ -9,7 +9,7 @@ pipeline {
                 DB_PASSWORD = "showcase"
             }
             steps {
-                sh 'docker compose start db'
+                sh 'docker compose up -d db'
                 sh 'php --version'
                 sh 'composer --version'
                 sh 'npm --version'
