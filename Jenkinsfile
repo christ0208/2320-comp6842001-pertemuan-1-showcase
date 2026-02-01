@@ -13,7 +13,7 @@ pipeline {
                 sh 'php --version'
                 sh 'composer --version'
                 sh 'npm --version'
-                sh 'composer update && composer install'
+                sh 'composer install'
                 sh 'npm install && npm run build'
                 sh 'echo APP_KEY= >> .env'
                 sh 'echo DB_HOST=${DB_HOST} >> .env'
